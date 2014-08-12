@@ -26,6 +26,7 @@ class Client(object):
     _comparison_conditions = set(('prevValue', 'prevIndex', 'prevExist'))
     _read_options = set(('recursive', 'wait', 'waitIndex', 'sorted', 'consistent'))
     _del_conditions = set(('prevValue', 'prevIndex'))
+
     def __init__(
             self,
             host='127.0.0.1',
@@ -207,7 +208,6 @@ class Client(object):
             key = "/{}".format(key)
         return key
 
-
     def write(self, key, value, ttl=None, dir=False, append=False, **kwdargs):
         """
         Writes the value for a key, possibly doing atomit Compare-and-Swap
@@ -293,8 +293,6 @@ class Client(object):
             kwdargs['prevIndex'] = obj.modifiedIndex
 
         return self.write(obj.key, obj.value, **kwdargs)
-
-
 
     def read(self, key, **kwdargs):
         """
@@ -502,8 +500,7 @@ class Client(object):
         local_index = index
         while True:
             response = self.watch(key, index=local_index, timeout=0)
-            if local_index is not None:
-                local_index += 1
+            local_index = response.etcd_index + 1
             yield response
 
     def get_lock(self, *args, **kwargs):
