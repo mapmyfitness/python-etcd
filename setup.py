@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 
 
-version = '0.3.2'
+version = '0.3.3'
 
 install_requires = [
     'urllib3>=1.7',
@@ -18,7 +18,8 @@ test_requires = [
     'nose',
 ]
 
-setup(name='python-etcd',
+setup(
+    name='mmf-python-etcd',
     version=version,
     description="A python client for etcd",
     long_description=README + '\n\n' + NEWS,
@@ -31,10 +32,11 @@ setup(name='python-etcd',
     keywords='etcd raft distributed log api client',
     author='Jose Plana',
     author_email='jplana@gmail.com',
-    url='http://github.com/jplana/python-etcd',
+    url='http://github.com/mapmyfitness/python-etcd',
+    download_url='http://pypi.mapmyfitness.com/mmf/stable/+simple/mmf-python-etcd/',
     license='MIT',
     packages=find_packages('src'),
-    package_dir = {'': 'src'},
+    package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
